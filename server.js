@@ -1,5 +1,8 @@
 const express = require("express");
 const app = express();
+const cors =require("cors");
+
+app.use(cors());
 
 const users = [
   { id: 1, name: "Prasanna" },
@@ -18,15 +21,15 @@ const products = [
 ];
 
 
-app.get("/products",(req,res)=>{
+app.get("/api/products",(req,res)=>{
     return res.status(200).json({message:"Products fetched successfully!",productsList:products});
 })
 
-app.get("/users",(req,res)=>{
+app.get("/api/users",(req,res)=>{
     return res.status(200).json({message:"Users fetched successfully !",usersList:users});
 })
 
-app.delete("/products/delete/:id",(req,res)=>{
+app.delete("/api/products/delete/:id",(req,res)=>{
    const id = parseInt(req.params.id);
   const index = products.findIndex((product) => product.id === id);
 
@@ -42,7 +45,7 @@ app.delete("/products/delete/:id",(req,res)=>{
   });
 })
 
-app.delete("/users/delete/:id",(req,res)=>{
+app.delete("/api/users/delete/:id",(req,res)=>{
     const id = parseInt(req.params.id);
     const index = users.findIndex(user=>user.id===id);
     if(index === -1 ){
